@@ -64,7 +64,7 @@ public class Schedule {
   public void runTaskWithFixedDelay() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:SS");
 
-    logger.info("Take a picture at {}", LocalDateTime.now().format(formatter));
+    logger.debug("Take a picture at {}", LocalDateTime.now().format(formatter));
     LocalDateTime timeOfPicture= LocalDateTime.now();
     ResultPicture result = monitorExporterAPI.getPicture(timeOfPicture.format(formatter), timeOfPicture);
 
