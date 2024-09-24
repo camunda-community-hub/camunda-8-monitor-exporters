@@ -22,7 +22,8 @@ public class OperateImporter implements Importer {
   public ResultComponent monitor(String resultName, ElasticSearchConnection elasticSearchConnection) {
 
     ResultComponent result = new ResultComponent(ResultComponent.Importer.OPERATE);
-    try (HttpClient client = HttpClient.newHttpClient();) {
+    HttpClient client = HttpClient.newHttpClient();
+    try {
       String url = elasticSearchConnection.getUrl("/operate-import-position*/_search?size=300");
       HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
       logger.debug("Operate Import URI[{}] ", url);

@@ -20,7 +20,8 @@ public class ZeebeImporter implements Importer {
   // complete the Result object
   public ResultComponent monitor(String resultName, ElasticSearchConnection elasticSearchConnection) {
     ResultComponent result = new ResultComponent(ResultComponent.Importer.ZEEBE);
-    try (HttpClient client = HttpClient.newHttpClient();) {
+    HttpClient client = HttpClient.newHttpClient();
+    try {
       String dataOption = "" // EOL
           + "{\"size\": 0, " // EOL
           + " \"aggs\": "// EOL

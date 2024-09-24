@@ -9,7 +9,7 @@ Does Operate importer follow the throughput? Are late behind?
 This project help to monitor this section.
 
 it will take every X seconds a photography on different tools, and on different item (process instance, variable) and calculate the delay.
-It will provide the tendance: does Operate retrieve the backlog? Or diverge?
+It will provide the tendency: does Operate retrieve the backlog? Or diverge?
 
 # Run as a project
 Run the command
@@ -21,7 +21,46 @@ Run the command
 To integrate the monitoring in a another tool, follow this instruction
 
 
-# REST API
+# Create a Docker image for a new version
+
+Run
+```shell
+mvn package
+
+```
+
+Manual operation
+Now, create a docker image.
+````
+docker build -t pierre-yves-monnet/camunda-8-monitor-exporters:1.0.0 .
+````
+
+
+Push the image to the Camunda hub (you must be login first to the docker registry)
+
+````
+docker tag pierre-yves-monnet/camunda-8-monitor-exporters:1.0.0 ghcr.io/camunda-community-hub/camunda-8-monitor-exporters:1.0.0
+docker push ghcr.io/camunda-community-hub/camunda-8-monitor-exporters:1.0.0
+````
+
+
+Tag as the latest:
+````
+docker tag pierre-yves-monnet/camunda-8-monitor-exporters:1.0.0 ghcr.io/camunda-community-hub/camunda-8-monitor-exporters:latest
+docker push ghcr.io/camunda-community-hub/camunda-8-monitor-exporters:latest
+````
+
+
+The image is available here.
+
+```
+ghcr.io/camunda-community-hub/camunda-8-monitor-exporters:latest
+````
+
+# REST API Used
+
+See https://confluence.camunda.com/pages/viewpage.action?pageId=207061205
+
 ## Zeebe
 The Rest API collect
 
