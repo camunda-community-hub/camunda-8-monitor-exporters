@@ -12,13 +12,13 @@ it will take every X seconds a photography on different tools, and on different 
 It will provide the tendency: does Operate retrieve the backlog? Or diverge?
 
 # Run as a project
-Run the command
+Run the JAR command camunda-8-monitor-exporters-1.0-exec.jar, main class is io.camunda.monitor.MonitorApplication
 
 # run as a POD in the cluster
-
+Check [README.md](kubernetes/README.md) for the Kubernetes yaml deployment file
 
 # integrate as a library
-To integrate the monitoring in a another tool, follow this instruction
+In progress
 
 
 # Create a Docker image for a new version
