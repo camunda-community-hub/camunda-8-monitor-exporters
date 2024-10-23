@@ -20,6 +20,39 @@ Check [README.md](kubernetes/README.md) for the Kubernetes yaml deployment file
 # integrate as a library
 In progress
 
+# Understand the result
+Check the logs on the pod. Every 15 seconds, a new photography is taken
+
+```
+
+
+       2024-09-24 23:51:04 | ZeebeSequence        | ZeebeDelta           | OperateSequence      | OperateDelta         | SequenceDelta        | Status               | ZeebeThroughput      | OperateThroughput   
+ PROCESS_INSTANCE          |    13510798882696716 |                44667 |    13510798882166441 |                 5400 |               530275 | BCKL;INC. 39,267     |    178,668 rec/mn    |     21,600 rec/mn
+ PROCESS                   |    13510798882111491 |                    0 |    13510798882111491 |                    0 |                    0 | sync;                |          0 rec/mn    |          0 rec/mn
+ VARIABLE                  |    13510798882146272 |                 2792 |    13510798882143874 |                 3585 |                 2398 | BCKL;-               |     11,168 rec/mn    |     14,340 rec/mn
+ JOB                       |    13510798882209735 |                 6329 |    13510798882165572 |                 5200 |                44163 | BCKL;INC. 1,129      |     25,316 rec/mn    |     20,800 rec/mn
+       2024-09-24 23:51:19 | ZeebeSequence        | ZeebeDelta           | OperateSequence      | OperateDelta         | SequenceDelta        | Status               | ZeebeThroughput      | OperateThroughput   
+ PROCESS_INSTANCE          |    13510798882743069 |                46353 |    13510798882168841 |                 2400 |               574228 | BCKL;INC. 43,953     |    185,412 rec/mn    |      9,600 rec/mn
+ PROCESS                   |    13510798882111491 |                    0 |    13510798882111491 |                    0 |                    0 | sync;                |          0 rec/mn    |          0 rec/mn
+ VARIABLE                  |    13510798882148048 |                 1776 |    13510798882145782 |                 1908 |                 2266 | BCKL;-               |      7,104 rec/mn    |      7,632 rec/mn
+ JOB                       |    13510798882221287 |                11552 |    13510798882168172 |                 2600 |                53115 | BCKL;INC. 8,952      |     46,208 rec/mn    |     10,400 rec/mn
+```
+What is important:
+
+**ZeebeDelta** delta between the previous picture. So, sing 23:51:04,  46353 records is created in PROCESS_INSTANCE in Zeebe
+
+**OperateDelta** same with operate : so the import in Operate works, but it imported only 2400 records in the same period
+
+**sequenceDelta**  is interesting: we have a backlog of 547228 records here. 
+
+**status** Different markers can show up:
+* **sync** there is no backlog, sequence in Zeebe and in Operate are synchrone. 
+* **BKCL**: more than 1000 records in the backlog.
+* **INC.** The backlog increase since the last photo, by 43953 new records.
+* **dec.** the backlog decrease.
+
+**ZeebeThroughput** and **OperateThroughput** are for information. 
+
 
 # Create a Docker image for a new version
 
