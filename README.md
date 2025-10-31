@@ -8,8 +8,7 @@
 # camunda-8-monitor-exporters
 Monitor exporter (Zeebe Exporter, Operate Importer, TaskList importer, Optimize importer)
 
-
-Zeebe export data to Elastic search.
+Zeebe export data to ElasticSearch/OpenSearch.
 
 Operate import the data.
 Does Operate importer follow the throughput? Are late behind?
@@ -17,6 +16,13 @@ This project help to monitor this section.
 
 it will take every X seconds a photography on different tools, and on different item (process instance, variable) and calculate the delay.
 It will provide the tendency: does Operate retrieve the backlog? Or diverge?
+
+# Deploy in your Kubernetes cluster and run it
+
+Check this [README.md](kubernetes/README.md). Using this Kubernetes file, deploy it and run it immediately.
+
+If the ElasticSearch/OpenSearch is oustide of the cluster, change the configuration (see the README)
+
 
 # Run as a project
 Run the JAR command camunda-8-monitor-exporters-1.0-exec.jar, main class is io.camunda.monitor.MonitorApplication
